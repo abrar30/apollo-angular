@@ -1,0 +1,41 @@
+##  Mutation
+mutation addSubscriptionAcc($input: SubscriptionAccInput!) {
+  SubscriptionAccCreate(input: $input) {
+    SubscriptionAccountID
+    AccountNo
+    Name
+  }
+}
+
+mutation Login($Password: String!, $LoginId: String!) {
+  Login(Password: $Password, LoginId: $LoginId) {
+    AccessToken
+    SubscriptionUser {
+      SubscriptionUserID
+      Status
+      IsAdmin
+    }
+  }
+}
+
+## Queries
+
+query getSubscriptionAcc($SubscriptionAccountID: String) {
+  SubscriptionAccListing(SubscriptionAccountID: $SubscriptionAccountID) {
+    SubscriptionAccountID
+    Name
+    Status
+  }
+}
+
+query BatchQuery($SubscriptionAccountID: String, $subInput: String!) {
+  SubscriptionAccListing(SubscriptionAccountID: $SubscriptionAccountID) {
+    SubscriptionAccountID
+    Name
+    Status
+  }
+
+  ClaimEntitlementListing(ClaimBenefitID: $subInput) {
+    Status
+  }
+}
